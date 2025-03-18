@@ -26,9 +26,6 @@ def generate_and_save_fernet_key(filename):
         file.close()
 
 
-generate_and_save_fernet_key(key_path)
-
-
 def import_fernet_key(filename):
     with open(filename, "rb") as file:
         private_key = open(key_path, "rb")
@@ -37,33 +34,35 @@ def import_fernet_key(filename):
 
 
 def main(argv):
-    try:
-        opts, args = getopt.getopt(
-            argv,
-            "hdDeE",
-        )
-    except:
-        print("Error")
+    print(argv)
+    opts, args = getopt.getopt(
+        argv,
+        "hdDeEgG",
+    )
+    print(opts)
 
     for opt, arg in opts:
         if opt in ["-d", "-D"]:
             print("Decrypting...")
             fernet_key = import_fernet_key(key_path).read()
-            print(fernet_key)
             fernet = Fernet(fernet_key)
+            print(fernet_key)
             decrypt_files_in_dir_recursively(fernet, target_directory)
-        elif opt in ["-h"]:
-            print(
-                "Usage \n\t -d, -D\t:Decrypt \n\t -e, -E\t:Encrypt \n\t -g, -G\t:Generate key"
-            )
         elif opt in ["-g", "-G"]:
             print("Generating key...")
             generate_and_save_fernet_key(key_path)
         elif opt in ["-e", "-E"]:
             print("Encrypting...")
             # encrypt the files
+            fernet_key = import_fernet_key(key_path).read()
+            fernet = Fernet(fernet_key)
+            print(fernet_key)
             encrypt_files_in_dir_recursively(
                 fernet, target_directory, extensions_to_encrypt
+            )
+        elif opt in ["-h"]:
+            print(
+                "Usage \n\t -d, -D\t:Decrypt \n\t -e, -E\t:Encrypt \n\t -g, -G\t:Generate key"
             )
 
 
