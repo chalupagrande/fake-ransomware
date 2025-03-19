@@ -1,4 +1,4 @@
-# Ransomware
+# Fake-Ransomware
 
 This is not actual ransomware, however -- it will irreversibly encrypt all the files on your computer if you are not careful. I just thought it was funny to call it ransomware. Just some recursive file encryption here. Nothing bad!
 
